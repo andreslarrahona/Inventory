@@ -124,7 +124,7 @@ export default {
   },
   methods: {
     toggleGroup(nombreGrupo) {
-      this.collapsedGroups[nombreGrupo] = !this.collapsedGroups[nombreGrupo];
+      this.instrumentosEscondidos[nombreGrupo] = !this.instrumentosEscondidos[nombreGrupo];
     }
   }
 };
