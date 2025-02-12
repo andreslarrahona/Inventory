@@ -1,0 +1,384 @@
+:root {
+    --color-0: #faf9f9;
+    --color-1: #efefef;
+    --color-2: #e5e5e5;
+    --color-3: #CBCBCB;
+    --color-4: #7f7f7f;
+    --color-5: #333333;
+    --color-6: #2AB6F4;
+    --color-7: #2BA0E2;
+    --color-8: #0F8DD3;
+    --color-9: #217FBF;
+    --color-10: #033b61;
+  }
+  
+  * {	font-family: 'Open Sans', sans-serif;
+}
+
+@media print {
+   @page {
+     margin-left: 0.8in;
+     margin-right: 0.8in;
+     margin-top: 0;
+     margin-bottom: 0;
+   }
+}
+body{
+    overflow-x:hidden;
+}
+#pci-container{
+    background-color:var(--color-0);
+    position:absolute;
+    left:0;
+    top:0;
+    
+}
+
+
+.tabla {
+    border-collapse:collapse;
+    width: 90%;
+    margin: 0 auto;
+    background-color: var(--color-1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size:0.8em;
+    overflow-y:scroll;
+    justify-self:center;
+}
+
+
+.tabla tr{
+    min-height:1em;
+}
+.tabla th, .tabla td{
+    padding: 5px;
+    text-align: center;
+}
+.tabla th {
+    background-color: var(--color-5);
+    color: var(--color-1);
+}
+.tabla tr:nth-child(even) {
+    background-color: var(--color-2);
+}
+.tabla tr:hover {
+    background-color: var(--color-3);
+    cursor:pointer;
+}
+
+#tabla-pci thead{
+    position:sticky;
+    top:7.4em;
+}
+
+
+
+#titulo-pci, #titulo-pcv{
+    width:calc(100vw - 10em);
+    padding:0.5em 5em ;
+    z-index:10;
+    font-size:1.2em;
+    font-weight:bold;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    overflow-x:hidden;    
+}
+
+#titulo-pci{
+    background-color:var(--color-0);
+  
+}
+
+#h3{
+    overflow-x:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    margin-right:2em;
+}
+
+
+.details-row td div{
+    text-align:left;
+    padding-left:5em;
+    cursor:text;
+
+}
+
+.filtro{
+    border:none;
+    font-size:0.8em;
+    background-color:inherit;
+    color:var(--color-5);
+    padding:0.2em;
+    padding-left:1em;
+    border-bottom:2px solid var(--color-7);
+    
+}
+
+.filtro:hover{
+    border-bottom:3px solid var(--color-9);
+}
+
+#buscador{
+    /*margin-right:8em;*/
+    width:10em;
+}
+
+.ri{
+    cursor:pointer;
+    color:var(--color-5);
+    font-weight:lighter;
+    font-size:1.5em;
+}
+
+#log{
+    cursor:pointer;
+}
+.ri:hover, #nuevo-serv:hover, #log:hover{
+    font-weight:bold;
+    color:var(--color-7);
+
+}
+
+#popup-ri {
+    display:none;
+    position:fixed;
+    top:10vh;
+    left:10vw;
+    width:80vw;
+    height:85vh;
+    border-radius:5px;
+    border:none;
+    background-color:var(--color-2);
+    z-index:1000;
+}
+
+#popup-prioritarios {
+    display:none;
+    position:fixed;
+    top:7vh;
+    left:10vw;
+    width:80vw;
+    height:90vh;
+    border:none;
+    background-color:var(--color-2);
+    z-index:1000;
+}
+
+#sombra{
+    display:none;
+    position:fixed;
+    z-index:600;
+    width:100vw;
+    height:100vh;
+    top:0;
+    left:0;
+    background-color:rgba(0, 0, 0, 0.5);
+}
+
+#nuevo-serv{
+    margin-left:1.5em;
+    margin-right:0.5em;
+    cursor:pointer;
+}
+
+
+#popup-editar-servicio{
+    display:none;
+    position:fixed;
+    width:75%;
+    height:2.5em;
+    border-radius:5px;
+    border:none;
+    z-index:100;
+    font-size:0.8em;
+    padding:0 1em 0 1.5em;
+    background-color:white;
+    margin-left:5em;
+    margin-bottom:3em;
+}
+
+#popup-editar-servicio input{
+    margin-left:1.2em;
+}
+
+
+.boton{
+    background-color:var(--color-7);
+    color:var(--color-1);
+    border-radius:5px;
+    border:none;
+    padding:0.5em 1em;
+    margin:0.5em;
+    cursor:pointer;
+    transition:background-color 0.3s;
+}
+
+.boton:hover{
+    background-color:var(--color-8);
+    color:var(--color-0);
+}
+
+.botonblancoyrojo{
+    background-color:var(--color-2);
+    color:var(--color-5);
+    border-radius:5px;
+    border:none;
+    padding:0.5em 1em;
+    margin:0.5em;
+    cursor:pointer;
+    transition:background-color 0.3s;
+    width:10em;
+}
+
+.botonblancoyrojo:hover{
+    color:var(--color-0);
+    background-color:red;
+    font-weight:bold;
+    width:10em;
+}
+
+
+
+#aceptar-nuevo-serv{
+    margin-left:1em;
+    margin-bottom:0.4em;
+    font-size:0.8em;
+}
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Posiciona el tooltip por encima del elemento */
+    left: 50%;
+    margin-left: -60px; /* Ajusta para centrar */
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size:0.85em;
+}
+
+.tooltip2{
+    width:50px;
+    margin-left:1px;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.green{
+    color:green;
+}
+
+.red{
+    color:red;
+}
+
+
+.green:hover, .red:hover{
+    font-weight:bold;
+    /*color:rgb(0, 44, 0);*/
+    cursor:pointer;
+}
+
+.naranja-negrita {
+    color: rgb(192, 95, 30);
+    /*font-weight:bold;*/
+
+}
+
+.rojo-negrita {
+    color: rgba(228, 0, 0, 0.699); /* Texto blanco */
+    font-weight: bold;
+    font-size:14px;
+}
+
+.circle {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    color:var(--color-1);
+    font-weight:bold;
+    background-color: var(--color-8);
+    text-align: center;
+    line-height: 18px;
+    font-size: 10px;
+}
+
+#cont-titulo-pcv{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    background-color:var(--color-2);
+    z-index:100;
+}
+
+#cerrar-popup-prioritarios{
+    cursor:pointer;
+    color:var(--color-5);
+}
+
+#cerrar-popup-prioritarios:hover{
+    color:var(--color-7);
+}
+
+
+.separador {
+    background-color: var(--color-1);
+    font-weight: bold;
+    color:var(--color-5);
+    cursor:text;
+    text-align: left !important;
+    padding-left:2em !important;
+    border-bottom: 2px solid #ccc;
+}
+
+.triangle {
+    display: inline-block; /* Asegura que el triángulo se muestre en línea */
+    transition: transform 0.3s; /* Animación para la rotación */
+    margin-right: 5px; /* Espacio entre el triángulo y el texto */
+}
+
+.triangle.rotated {
+    transform: rotate(180deg); /* Rota el triángulo cuando se expande el grupo */
+}
+
+.separador:hover{
+    color:var(--color-8);
+}
+
+
+#tabla--pcv tr:hover{
+    cursor:default;
+}
+
+#tabla--pcv thead tr{
+    position:sticky;
+    top:7.4em;
+}
+
+
+#tabla-pcv tr td{
+    text-align:left;
+}
+

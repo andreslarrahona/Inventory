@@ -1,0 +1,137 @@
+:root {
+    --color-0: #faf9f9;
+    --color-1: #efefef;
+    --color-2: #e5e5e5;
+    --color-3: #CBCBCB;
+    --color-4: #7f7f7f;
+    --color-5: #333333;
+    --color-6: #2AB6F4;
+    --color-7: #2BA0E2;
+    --color-8: #0F8DD3;
+    --color-9: #217FBF;
+    --color-10: #033b61;
+  }
+  
+  * {	font-family: 'Open Sans', sans-serif;
+    
+}
+body{
+    background-color:var(--color-0);
+}
+
+header{
+    height:10vh;
+    min-height:10vh;
+    max-height:10vh;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100vw;
+    padding-left:7vw;
+    background-color:var(--color-0);
+    z-index:2;
+}
+
+header h1{
+    width:19em;
+    min-width:19em;
+
+}
+
+.tabla {
+    border-collapse:collapse;
+    width: 90%;
+    margin: 10vh auto;
+    background-color: var(--color-1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size:0.8em;
+    overflow-y:scroll;
+    justify-self:center;
+}
+
+.tabla tr{
+    min-height:1em;
+}
+
+
+.tabla th, .tabla td{
+    padding: 5px;
+    text-align: center;
+    min-width:10em;
+    max-width:10em;
+}
+.tabla th {
+    background-color: var(--color-5);
+    color: var(--color-1);
+}
+.tabla thead{
+    position:sticky;
+    top:10vh;
+}
+
+.tabla tr:nth-child(even) {
+    background-color: var(--color-2);
+}
+
+
+
+.tabla td:nth-of-type(2),
+.tabla td:nth-of-type(6),
+.tabla th:nth-of-type(2),
+.tabla th:nth-of-type(6){
+    min-width:16em;
+    max-width:16em;
+}
+
+.tabla th:nth-of-type(1){
+    padding-left:2em;
+}
+
+.tabla td:nth-of-type(1),
+.tabla td:last-of-type,
+.tabla th:nth-of-type(1),
+.tabla th:last-of-type{
+    min-width:5em;
+    max-width:5em;
+}
+  
+.icono-collapsible {
+    margin-right: 8px;
+}
+
+.grupo-header {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    cursor: pointer; 
+    position:sticky;
+    top:13vh;
+    
+}
+
+.grupo-header td{
+    text-align: left;
+    padding:0.5em;
+    padding-left:2em;
+}
+
+.grupo-header td:hover{
+    color:var(--color-9);
+}
+
+.fila:hover {
+    background-color: var(--color-3);
+    cursor:default;
+}
+
+#buscador{
+    position:fixed;
+    right:10vw;
+    top:5vh;
+    border:none;
+    border-bottom:solid 2px var(--color-6);
+    z-index:10;
+    font-size:1em;
+    width:15em;
+    background-color:var(--color-0);
+    padding-left:1em;
+}
