@@ -21,12 +21,12 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Itera sobre cada grupo filtrado -->
+        <!-- Iteramos sobre cada grupo filtrado -->
         <template v-for="(grupo, nombreGrupo) in instrumentosAgrupadosFiltrados" :key="nombreGrupo">
           <tr class="grupo-header" @click="toggleGroup(nombreGrupo)">
             <td colspan="7">
-              <span class="icono-collapsible">
-                {{ collapsedGroups[nombreGrupo] ? '▼' : '▲' }}
+              <span class="icono-colapse">
+                {{ instrumentosEscondidos[nombreGrupo] ? '▼' : '▲' }}
               </span>
               {{ nombreGrupo }}
             </td>
@@ -34,7 +34,7 @@
           <tr
             v-for="instrumento in grupo"
             :key="instrumento.id_interno"
-            v-if="!collapsedGroups[nombreGrupo]"
+            v-if="!instrumentosEscondidos[nombreGrupo]"
             class="fila"
           >
             <td>{{ instrumento.id_interno }}</td>
@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       instrumentos: [], // Datos obtenidos de la API
-      collapsedGroups: {}, // Estado de colapso de cada grupo
+      instrumentosEscondidos: {}, // Estado de colapso de cada grupo
       busqueda: "" // Valor del input de búsqueda
     };
   },
@@ -67,8 +67,8 @@ export default {
       const response = await api.get('src/api/axios');
       this.instrumentos = response.data;
       // Inicializa todos los grupos como colapsados
-      for (const grupo in this.instrumentosAgrupados) {
-        this.collapsedGroups[grupo] = true;
+      for (const instrumento in this.instrumentosAgrupados) {
+        this.instrumentosEscondidos[instrumento] = true;
       }
     } catch (error) {
       console.error('Error al obtener los instrumentos:', error);
@@ -76,7 +76,7 @@ export default {
   },
   computed: {
     instrumentosAgrupados() {
-      return this.instrumentos.reduce((grupos, instrumento) => {
+      return this.instrumentos.reduce((instrumentosEnGrupo, instrumento) => {
         const prefix = instrumento.id_interno.slice(0, 2);
         let nombreGrupo = '';
 
@@ -92,37 +92,35 @@ export default {
           default: nombreGrupo = 'Otros';
         }
 
-        if (!grupos[nombreGrupo]) {
-          grupos[nombreGrupo] = [];
+        if (!instrumentosEnGrupo[nombreGrupo]) {
+          instrumentosEnGrupo[nombreGrupo] = [];
         }
-        grupos[nombreGrupo].push(instrumento);
-        return grupos;
+        instrumentosEnGrupo[nombreGrupo].push(instrumento);
+        return instrumentosEnGrupo;
       }, {});
     },
 
-    // 🔍 Computed para filtrar los instrumentos según la búsqueda
-    instrumentosAgrupadosFiltrados() {
-      if (!this.busqueda.trim()) {
-        return this.instrumentosAgrupados;
-      }
-
-      const busquedaLower = this.busqueda.toLowerCase();
-      const filtrados = {};
-
-      for (const grupo in this.instrumentosAgrupados) {
-        const instrumentosFiltrados = this.instrumentosAgrupados[grupo].filter(instrumento => {
-          return Object.values(instrumento).some(valor =>
-            String(valor).toLowerCase().includes(busquedaLower)
-          );
-        });
-
-        if (instrumentosFiltrados.length > 0) {
-          filtrados[grupo] = instrumentosFiltrados;
-        }
-      }
-
-      return filtrados;
+    // Filtro los instrumentos según la búsqueda
+     instrumentosAgrupadosFiltrados() {
+    if (!this.busqueda.trim()) {
+      return this.instrumentosAgrupados;
     }
+
+    const busquedaLower = this.busqueda.toLowerCase();
+    const filtrados = {};
+
+    for (const instrumento in this.instrumentosAgrupados) {
+      const instrumentosFiltrados = this.instrumentosAgrupados[instrumento].filter(inst =>
+        JSON.stringify(inst).toLowerCase().includes(busquedaLower)
+      );
+
+      if (instrumentosFiltrados.length) {
+        filtrados[instrumento] = instrumentosFiltrados;
+      }
+    }
+
+    return filtrados;
+  }
   },
   methods: {
     toggleGroup(nombreGrupo) {

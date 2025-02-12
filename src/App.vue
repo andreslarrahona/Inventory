@@ -10,13 +10,13 @@
 
 <script>
   
-// Importa el componente TablaInstrumentos
+// Importamos el componente TablaInstrumentos
 import TablaInstrumentos from './components/TablaInstrumentos.vue';
 
 export default {
   name: 'App',
   components: {
-    TablaInstrumentos  // Aquí registras el componente para usarlo
+    TablaInstrumentos
   },
 };
 </script>
